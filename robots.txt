@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://xqszx.github.io/sitemap.xml

@@ -1,0 +1,51 @@
+---
+layout: default
+---
+<section class="home">
+  <div class="hero">
+    <h1>{{ page.title | default: "ROS2 学习笔记" }}</h1>
+    <p class="subtitle">{{ page.description | default: "记录ROS2学习过程的个人博客" }}</p>
+  </div>
+  
+  {{ content }}
+  
+  {% if site.posts.size > 0 %}
+  <h2 class="section-title">最新文章</h2>
+  <div class="posts-list">
+    {% for post in site.posts limit:5 %}
+    <a href="{{ post.url | relative_url }}" class="post-card">
+      <h3 class="post-title">{{ post.title }}</h3>
+      <div class="post-meta">
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          {{ post.date | date: "%Y-%m-%d" }}
+        </span>
+        {% if post.categories.size > 0 %}
+        <span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path>
+          </svg>
+          {{ post.categories | join: ", " }}
+        </span>
+        {% endif %}
+      </div>
+      {% if post.excerpt %}
+      <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+      {% endif %}
+      {% if post.tags.size > 0 %}
+      <div class="post-tags">
+        {% for tag in post.tags limit: 4 %}
+        <span class="tag">{{ tag }}</span>
+        {% endfor %}
+      </div>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>

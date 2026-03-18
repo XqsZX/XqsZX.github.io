@@ -1,0 +1,560 @@
+// 变量定义
+$bg-primary: #0a0a0f;
+$bg-secondary: #12121a;
+$bg-card: #1a1a2e;
+$text-primary: #e4e4e7;
+$text-secondary: #a1a1aa;
+$accent-primary: #7c3aed;
+$accent-secondary: #06b6d4;
+$accent-gradient: linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+$border-color: rgba(124, 58, 237, 0.3);
+$shadow-glow: 0 0 20px rgba(124, 58, 237, 0.3);
+$font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+$font-sans: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+
+// 基础样式
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: $font-sans;
+  background: $bg-primary;
+  color: $text-primary;
+  line-height: 1.7;
+  min-height: 100vh;
+  
+  // 网格背景
+  background-image: 
+    linear-gradient(rgba(124, 58, 237, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+// 容器
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// 导航栏
+header.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10, 10, 15, 0.8);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid $border-color;
+  padding: 1rem 0;
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .site-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    background: $accent-gradient;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+    
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+  
+  nav {
+    display: flex;
+    gap: 2rem;
+    
+    a {
+      color: $text-secondary;
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      position: relative;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: $accent-gradient;
+        transition: width 0.3s ease;
+      }
+      
+      &:hover {
+        color: $text-primary;
+        
+        &::after {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
+
+// 主内容区
+main {
+  padding: 4rem 0;
+  min-height: calc(100vh - 200px);
+}
+
+// 首页
+.home {
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+    padding: 3rem 0;
+    
+    h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: $accent-gradient;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+    }
+    
+    .subtitle {
+      font-size: 1.2rem;
+      color: $text-secondary;
+      margin-bottom: 2rem;
+    }
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: $text-primary;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    
+    &::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: $accent-gradient;
+      border-radius: 2px;
+    }
+  }
+  
+  .roadmap {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    
+    .roadmap-item {
+      background: $bg-card;
+      border: 1px solid $border-color;
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        border-color: $accent-primary;
+        box-shadow: $shadow-glow;
+        transform: translateX(5px);
+      }
+      
+      .number {
+        width: 36px;
+        height: 36px;
+        background: $accent-gradient;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+      }
+      
+      .content {
+        h3 {
+          font-size: 1rem;
+          font-weight: 600;
+          margin-bottom: 0.25rem;
+        }
+        
+        p {
+          font-size: 0.875rem;
+          color: $text-secondary;
+        }
+      }
+    }
+  }
+}
+
+// 文章列表
+.posts-list {
+  display: grid;
+  gap: 1.25rem;
+  
+  .post-card {
+    background: $bg-card;
+    border: 1px solid $border-color;
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: block;
+    
+    &:hover {
+      border-color: $accent-primary;
+      box-shadow: $shadow-glow;
+      transform: translateY(-3px);
+    }
+    
+    .post-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 0.5rem;
+    }
+    
+    .post-meta {
+      font-size: 0.85rem;
+      color: $text-secondary;
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+      }
+    }
+    
+    .post-excerpt {
+      font-size: 0.9rem;
+      color: $text-secondary;
+      line-height: 1.6;
+    }
+    
+    .post-tags {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      
+      .tag {
+        background: rgba(124, 58, 237, 0.15);
+        color: $accent-primary;
+        padding: 0.25rem 0.75rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+// 文章页面
+.post {
+  .post-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $border-color;
+    
+    .post-title {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: $accent-gradient;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+    
+    .post-meta {
+      color: $text-secondary;
+      font-size: 0.9rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      
+      span {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+  
+  .post-content {
+    h2 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      color: $text-primary;
+      position: relative;
+      padding-left: 1rem;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: $accent-gradient;
+        border-radius: 2px;
+      }
+    }
+    
+    h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin: 2rem 0 0.75rem;
+      color: $text-primary;
+    }
+    
+    p {
+      margin-bottom: 1.25rem;
+      color: $text-primary;
+    }
+    
+    a {
+      color: $accent-secondary;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s ease;
+      
+      &:hover {
+        border-bottom-color: $accent-secondary;
+      }
+    }
+    
+    ul, ol {
+      margin-bottom: 1.25rem;
+      padding-left: 1.5rem;
+      color: $text-primary;
+      
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+    
+    blockquote {
+      background: rgba(124, 58, 237, 0.1);
+      border-left: 4px solid $accent-primary;
+      padding: 1rem 1.5rem;
+      margin: 1.5rem 0;
+      border-radius: 0 8px 8px 0;
+      
+      p {
+        margin-bottom: 0;
+        color: $text-secondary;
+      }
+    }
+    
+    hr {
+      border: none;
+      height: 1px;
+      background: $border-color;
+      margin: 2rem 0;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+      
+      th, td {
+        padding: 0.75rem 1rem;
+        text-align: left;
+        border: 1px solid $border-color;
+      }
+      
+      th {
+        background: $bg-card;
+        font-weight: 600;
+      }
+      
+      tr:hover {
+        background: rgba(124, 58, 237, 0.05);
+      }
+    }
+  }
+}
+
+// 代码块样式在 syntax.scss 中
+
+// 关于页面
+.page {
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: $accent-gradient;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+  }
+  
+  .page-content {
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 2rem 0 1rem;
+      color: $text-primary;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+      color: $text-primary;
+    }
+    
+    ul {
+      padding-left: 1.5rem;
+      
+      li {
+        margin-bottom: 0.5rem;
+      }
+    }
+    
+    a {
+      color: $accent-secondary;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// 页脚
+footer.site-footer {
+  background: $bg-secondary;
+  border-top: 1px solid $border-color;
+  padding: 2rem 0;
+  margin-top: 4rem;
+  
+  .container {
+    text-align: center;
+  }
+  
+  p {
+    color: $text-secondary;
+    font-size: 0.875rem;
+  }
+  
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1rem;
+    
+    a {
+      color: $text-secondary;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      
+      &:hover {
+        color: $accent-primary;
+      }
+    }
+  }
+}
+
+// 响应式设计
+@media (max-width: 768px) {
+  header.site-header {
+    .container {
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    nav {
+      gap: 1.25rem;
+    }
+  }
+  
+  .home .hero h1 {
+    font-size: 2rem;
+  }
+  
+  .post .post-header .post-title {
+    font-size: 1.75rem;
+  }
+}
+
+// 动画
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.home .roadmap-item,
+.posts-list .post-card {
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+@for $i from 1 through 10 {
+  .home .roadmap-item:nth-child(#{$i}),
+  .posts-list .post-card:nth-child(#{$i}) {
+    animation-delay: #{$i * 0.1}s;
+  }
+}
+
+// 滚动条样式
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: $bg-secondary;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $accent-primary;
+  border-radius: 4px;
+  
+  &:hover {
+    background: lighten($accent-primary, 10%);
+  }
+}
+
+// 选择文本样式
+::selection {
+  background: rgba(124, 58, 237, 0.3);
+  color: $text-primary;
+}

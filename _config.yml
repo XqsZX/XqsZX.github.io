@@ -1,5 +1,5 @@
 title: ROS2 学习笔记
-description: 记录ROS2学习过程
+description: 记录ROS2学习过程的个人博客
 author: XqsZX
 email: xin.zhao@email.com
 baseurl: ""
@@ -8,13 +8,22 @@ url: "https://xqszx.github.io"
 markdown: kramdown
 highlighter: rouge
 
-theme: minima
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: false
 
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
 
-header_pages:
-  - about.md
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
 
-show_excerpts: true
+timezone: Asia/Shanghai
+lang: zh-CN

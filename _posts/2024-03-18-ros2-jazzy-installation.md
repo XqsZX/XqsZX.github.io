@@ -4,6 +4,7 @@ title: "ROS2 Jazzy 安装教程"
 date: 2024-03-18
 categories: ros2
 tags: [ros2, installation, ubuntu]
+reading_time: 5
 ---
 
 本文记录在Ubuntu 24.04上安装ROS2 Jazzy的完整步骤。
