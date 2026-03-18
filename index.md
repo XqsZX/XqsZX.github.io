@@ -1,10 +1,12 @@
 ---
 layout: home
-title: ROS2 学习笔记
-description: 记录ROS2学习过程的个人博客
+title: 赵鑫的博客
+description: 记录学习与思考
 ---
 
-<h2 class="section-title">学习路线</h2>
+<h2 class="section-title">ROS2 学习笔记</h2>
+
+<p style="color: #a1a1aa; margin-bottom: 2rem; font-size: 0.95rem;">记录ROS2学习过程，从零开始掌握机器人操作系统。</p>
 
 <div class="roadmap">
   <div class="roadmap-item">
