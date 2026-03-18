@@ -1,6 +1,6 @@
 ---
 layout: home
-title: 赵鑫的博客
+title: XqsZX的博客
 description: 记录学习与思考
 ---
 
