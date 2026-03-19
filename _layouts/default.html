@@ -13,5 +13,101 @@
   <footer class="site-footer">
     {% include footer.html %}
   </footer>
+  
+  <script>
+  // 代码块增强 - 添加语言标签和复制按钮
+  document.addEventListener('DOMContentLoaded', function() {
+    // 语言映射表
+    const langMap = {
+      'bash': 'Bash',
+      'sh': 'Shell',
+      'shell': 'Shell',
+      'python': 'Python',
+      'py': 'Python',
+      'cpp': 'C++',
+      'c': 'C',
+      'javascript': 'JavaScript',
+      'js': 'JavaScript',
+      'typescript': 'TypeScript',
+      'ts': 'TypeScript',
+      'java': 'Java',
+      'go': 'Go',
+      'rust': 'Rust',
+      'yaml': 'YAML',
+      'yml': 'YAML',
+      'json': 'JSON',
+      'xml': 'XML',
+      'html': 'HTML',
+      'css': 'CSS',
+      'sql': 'SQL',
+      'dockerfile': 'Dockerfile',
+      'makefile': 'Makefile',
+      'cmake': 'CMake',
+      'text': '',
+      'plaintext': ''
+    };
+    
+    // 处理所有代码块
+    document.querySelectorAll('pre').forEach(function(pre) {
+      const code = pre.querySelector('code');
+      
+      // 获取语言类型
+      let lang = '';
+      if (code && code.className) {
+        const match = code.className.match(/language-(\w+)/);
+        if (match) {
+          lang = langMap[match[1]] || match[1].toUpperCase();
+        }
+      }
+      
+      // 设置语言标签
+      pre.setAttribute('data-lang', lang);
+      
+      // 创建复制按钮
+      const copyBtn = document.createElement('button');
+      copyBtn.className = 'copy-btn';
+      copyBtn.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+          <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+        </svg>
+        <span>复制</span>
+      `;
+      
+      // 插入按钮
+      pre.style.position = 'relative';
+      pre.appendChild(copyBtn);
+      
+      // 复制功能
+      copyBtn.addEventListener('click', async function() {
+        const codeText = code ? code.textContent : pre.textContent;
+        
+        try {
+          await navigator.clipboard.writeText(codeText);
+          copyBtn.classList.add('copied');
+          copyBtn.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+            <span>已复制</span>
+          `;
+          
+          setTimeout(function() {
+            copyBtn.classList.remove('copied');
+            copyBtn.innerHTML = `
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span>复制</span>
+            `;
+          }, 2000);
+        } catch (err) {
+          console.error('复制失败:', err);
+        }
+      });
+    });
+  });
+  </script>
 </body>
 </html>
