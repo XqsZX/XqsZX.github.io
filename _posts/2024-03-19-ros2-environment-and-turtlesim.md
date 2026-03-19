@@ -61,13 +61,82 @@ ROS_DISTRO=jazzy
 
 ### 1.5 设置 ROS_DOMAIN_ID
 
-ROS_DOMAIN_ID 用于区分不同组的 ROS2 节点。同一组的节点需要使用相同的 domain ID：
+#### 什么是 ROS_DOMAIN_ID？
+
+**ROS_DOMAIN_ID 就像是"频道号"，只有同一频道的 ROS2 节点才能互相通信。**
+
+#### 生活类比
+
+想象一个教室里有多个小组在做实验：
+
+| 场景 | ROS2 对应 |
+|-----|----------|
+| 小组 A 在频道 0 讨论 | DOMAIN_ID=0 的节点互相通信 |
+| 小组 B 在频道 1 讨论 | DOMAIN_ID=1 的节点互相通信 |
+| 不同小组互不干扰 | 不同 DOMAIN_ID 的节点互不通信 |
+
+#### 实际应用场景
+
+**场景 1：多机器人系统**
+
+```
+机器人 A（DOMAIN_ID=10）
+├── 导航节点
+├── 感知节点
+└── 控制节点
+    ↓ 只与同 ID 的节点通信
+
+机器人 B（DOMAIN_ID=20）
+├── 导航节点
+├── 感知节点
+└── 控制节点
+    ↓ 只与同 ID 的节点通信
+
+两个机器人互不干扰！
+```
+
+**场景 2：教室实验**
+
+10 组学生，每组设置不同的 DOMAIN_ID（1-10），避免话题冲突。
+
+#### 默认值
+
+ROS2 默认 DOMAIN_ID = 0，所有未设置的节点都在同一个频道。
+
+#### 验证实验
+
+**终端 1**（DOMAIN_ID=0）：
+
+```bash
+export ROS_DOMAIN_ID=0
+ros2 run demo_nodes_cpp talker
+```
+
+**终端 2**（DOMAIN_ID=0）：
+
+```bash
+export ROS_DOMAIN_ID=0
+ros2 run demo_nodes_py listener
+# ✅ 能收到消息
+```
+
+**终端 3**（DOMAIN_ID=1）：
+
+```bash
+export ROS_DOMAIN_ID=1
+ros2 run demo_nodes_py listener
+# ❌ 收不到消息，因为频道不同
+```
+
+#### 设置方法
+
+临时设置（当前终端有效）：
 
 ```bash
 export ROS_DOMAIN_ID=<your_domain_id>
 ```
 
-永久设置：
+永久设置（添加到启动脚本）：
 
 ```bash
 echo "export ROS_DOMAIN_ID=<your_domain_id>" >> ~/.bashrc
