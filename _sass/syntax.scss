@@ -22,8 +22,8 @@ pre {
   margin: 1.5rem 0;
   position: relative;
   
-  // 代码块顶部装饰
-  &::before {
+  // 代码块顶部装饰条
+  &::after {
     content: '';
     position: absolute;
     top: 0;
@@ -52,7 +52,8 @@ pre {
   overflow: hidden;
   position: relative;
   
-  &::before {
+  // 顶部装饰条
+  &::after {
     content: '';
     position: absolute;
     top: 0;
@@ -68,7 +69,7 @@ pre {
     border: none;
     padding-top: 1.5rem;
     
-    &::before {
+    &::after {
       display: none;
     }
   }
